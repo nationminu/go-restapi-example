@@ -30,6 +30,8 @@ type Response struct {
 	Uuid    string
 }
 
+func doNothing(w http.ResponseWriter, r *http.Request) {}
+
 func requestTracker(w http.ResponseWriter, r *http.Request) {
 	//fmt.Fprintf(w, "Welcome to the requestTracker!")
 	id := uuid.New()
@@ -64,6 +66,7 @@ func requestTracker(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleRequests() {
+	http.HandleFunc("/favicon.ico", doNothing)
 	http.HandleFunc("/", requestTracker)
 	address := ":" + port
 
