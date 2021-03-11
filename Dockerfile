@@ -30,4 +30,6 @@ WORKDIR /home/golang
 # Copy all build artifacts from builder image
 COPY --from=builder --chown=golang:golang /home/golang/* /home/golang/bin
 
+EXPOSE 10000
+
 CMD "/home/golang/bin/golang"
