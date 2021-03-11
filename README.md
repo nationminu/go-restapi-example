@@ -13,6 +13,7 @@ go get github.com/google/uuid
 go run main.go
 ```
 
+## Test
 ```
 curl http://localhost
 {
@@ -26,4 +27,10 @@ curl http://localhost
     },
     "Uuid": "f26bbebd-c15c-4a04-a6d9-97e45cb92095"
 }
+```
+
+## Docker build
+```
+docker build -t go-restapi:latest .    
+docker run -d -p "10000:10000" go-restapi:lastet
 ```
