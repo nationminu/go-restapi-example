@@ -33,4 +33,13 @@ curl http://localhost
 ```
 docker build -t go-restapi:latest .    
 docker run -d -p "10000:10000" go-restapi:lastet
+docker tag go-restapi bastion.ps.example.com:5000/rockplace/restapi:latest
+docker push bastion.ps.example.com:5000/rockplace/restapi:latest
+```
+
+## Openshift import image
+```
+oc import-image restapi --from=bastion.ps.example.com:5000/rockplace/restapi:latest --insecure --confirm
+oc new-app --name=restapi --image-stream=restapi:latest
+oc expose svc/restapi
 ```
