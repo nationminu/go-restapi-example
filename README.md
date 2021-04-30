@@ -3,13 +3,11 @@
 ## Build
 
 ```
-go get github.com/google/uuid
 go build
 ```
 
 ## Run
 ``` 
-go get github.com/google/uuid
 go run main.go
 ```
 
