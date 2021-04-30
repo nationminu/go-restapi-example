@@ -8,7 +8,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/google/uuid"
+    	"math/rand"
 )
 
 var (
@@ -34,7 +34,7 @@ func doNothing(w http.ResponseWriter, r *http.Request) {}
 
 func requestTracker(w http.ResponseWriter, r *http.Request) {
 	//fmt.Fprintf(w, "Welcome to the requestTracker!")
-	id := uuid.New()
+	id := randomString(10)
 
 	headers := make(map[string]string)
 
@@ -50,7 +50,7 @@ func requestTracker(w http.ResponseWriter, r *http.Request) {
 	body, _ := ioutil.ReadAll(r.Body)
 	//fmt.Println(string(body))
 
-	Responses := Response{Method: r.Method, Path: r.URL.Path, Args: string(r.URL.RawQuery), Body: string(body), Headers: headers, Uuid: id.String()}
+	Responses := Response{Method: r.Method, Path: r.URL.Path, Args: string(r.URL.RawQuery), Body: string(body), Headers: headers, Uuid: id}
 
 	//output, err := json.Marshal(Responses)
 	output, err := json.MarshalIndent(Responses, "", "    ")
@@ -75,6 +75,16 @@ func handleRequests() {
 	if err != nil {
 		panic(err)
 	}
+}
+
+func randomString(n int) string {
+    var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
+ 
+    s := make([]rune, n)
+    for i := range s {
+        s[i] = letters[rand.Intn(len(letters))]
+    }
+    return string(s)
 }
 
 func main() {
